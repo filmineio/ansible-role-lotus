@@ -23,6 +23,19 @@
     - install
     - source
 
+- name: Make target
+  become: true
+  when: install_type == "source"
+  make:
+    chdir: "{{ install_dir }}"
+    target: {{ make_clean_target }}
+  environment:
+    PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
+  changed_when: false
+  tags:
+    - install
+    - source
+
 - name: Build source package
   become: true
   when: install_type == "source"
