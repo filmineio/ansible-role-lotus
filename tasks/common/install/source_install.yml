@@ -10,25 +10,12 @@
     - install
     - source
 
-- name: Make clean source
-  become: true
-  when: install_type == "source"
-  make:
-    chdir: "{{ install_dir }}"
-    target: clean
-  environment:
-    PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
-  changed_when: false
-  tags:
-    - install
-    - source
-
 - name: Make target
   become: true
   when: install_type == "source"
   make:
     chdir: "{{ install_dir }}"
-    target: "{{ make_clean_target }}"
+    target: "{{ lotus_make_target }}"
   environment:
     PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
   changed_when: false
