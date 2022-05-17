@@ -1,7 +1,7 @@
 ---
 - name: Setup Lotus Storage Miner systemd unit
   include_role:
-    name: 0x0i.systemd
+    name: altlabs.systemd
   vars:
     unit_config:
       - name: lotus-miner
