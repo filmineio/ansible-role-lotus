@@ -1,6 +1,7 @@
 ---
 - name: Clone lotus git repository
   become: true
+  become_user: "{{ lotus_user }}"
   when: install_type == "source"
   git:
     repo: "{{ git_url }}"
