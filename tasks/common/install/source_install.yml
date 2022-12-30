@@ -14,8 +14,8 @@
   become: true
   when: install_type == "source"
   make:
-    chdir: "{{ install_dir }}"''
-    target: clean "{{ 'calibnet' if testnet == 'true' else '' }}"
+    chdir: "{{ install_dir }}"
+    target: clean
   environment:
     PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
   changed_when: false
@@ -28,7 +28,7 @@
   when: install_type == "source"
   make:
     chdir: "{{ install_dir }}"
-    target: all
+    target: "{{ 'calibnet' if testnet == 'true' else 'all' }}"
   environment:
     PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
   changed_when: false
