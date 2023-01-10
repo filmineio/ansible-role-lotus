@@ -4,6 +4,7 @@
   become_user: "{{ lotus_user }}"
   when: install_type == "source"
   git:
+    force: true
     repo: "{{ git_url }}"
     dest: "{{ install_dir }}"
     version: "{{ git_version }}"
