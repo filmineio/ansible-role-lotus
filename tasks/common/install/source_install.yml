@@ -1,5 +1,7 @@
 ---
 - name: Clone lotus git repository
+  become: true
+  become_user: "{{ lotus_user }}"
   when: install_type == "source"
   git:
     force: true
@@ -10,7 +12,23 @@
     - install
     - source
 
+- name: Make clean source
+  become: true
+  become_user: "{{ lotus_user }}"
+  when: install_type == "source"
+  make:
+    chdir: "{{ install_dir }}"
+    target: clean
+  environment:
+    PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
+  changed_when: false
+  tags:
+    - install
+    - source
+
 - name: Make target
+  become: true
+  become_user: "{{ lotus_user }}"
   when: install_type == "source"
   make:
     chdir: "{{ install_dir }}"
@@ -47,3 +65,5 @@
   tags:
     - install
     - source
+
+

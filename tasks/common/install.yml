@@ -20,6 +20,10 @@
   tags:
     - install
 
+- name: Explicitly lotus user home
+  become:   true
+  command: usermod -d {{ lotus_user_home }} {{ lotus_user }}
+
 - name: Ensure existence of install dir
   become: true
   file:
