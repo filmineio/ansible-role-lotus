@@ -39,7 +39,7 @@
   become: true
   file:
     src: "{{ coldstore_path }}"
-    dest: "{{ lotus_path }}/.lotus/datastore/chain"
+    dest: "{{ lotus_path }}/datastore/chain"
     state: link
     owner: lotus
     group: lotus
