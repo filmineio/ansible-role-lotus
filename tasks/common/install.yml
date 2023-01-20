@@ -21,8 +21,13 @@
     - install
 
 - name: Explicitly lotus user home
-  become:   true
+  become: true
   command: usermod -d {{ lotus_user_home }} {{ lotus_user }}
+
+- name: Copy gitconfig
+  become: true
+  become_user: "{{ lotus_user }}"
+  command: git config --global --add safe.directory '*'
 
 - name: Ensure existence of install dir
   become: true

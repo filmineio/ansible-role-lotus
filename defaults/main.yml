@@ -2,6 +2,7 @@
 system_dependencies: []
 
 lotus_user: lotus
+lotus_user_path: /opt/lotus
 
 install_type: archive
 install_dir: /opt/lotus
