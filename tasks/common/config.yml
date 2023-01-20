@@ -34,3 +34,15 @@
     state: directory
   tags:
     - config
+
+- name: Create symbolic links for offloading coldstore to storage
+  become: true
+  file:
+    src: "{{ coldstore_path }}"
+    dest: "{{ lotus_path }}/datastore/chain"
+    state: link
+    owner: lotus
+    group: lotus
+    mode: 755
+    force: yes
+  when: coldstore_path is defined
