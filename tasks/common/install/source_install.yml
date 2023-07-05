@@ -8,6 +8,8 @@
     repo: "{{ git_url }}"
     dest: "{{ install_dir }}"
     version: "{{ git_version }}"
+    recursive: yes
+    update: yes
   tags:
     - install
     - source
@@ -21,10 +23,14 @@
     target: clean
   environment:
     PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
+    CARGO_HOME: "{{ cargo_home }}"
   changed_when: false
   tags:
     - install
     - source
+
+- debug:
+    var: cargo_home
 
 - name: Make target
   become: true
@@ -45,7 +51,7 @@
   when: install_type == "source"
   make:
     chdir: "{{ install_dir }}"
-    target: install
+    target: "{{ lotus_make_install_target }}"
   environment:
     PATH: "{{ cargo_home }}/bin:{{ ansible_env.PATH }}"
   changed_when: false
