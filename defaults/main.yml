@@ -39,3 +39,4 @@ managed_services: ['lotus']
 
 cargo_home: "{{ /home/{{ ansible_env.HOME }}/.cargo }}"
 lotus_make_target: ""
+lotus_make_install_target: ""
