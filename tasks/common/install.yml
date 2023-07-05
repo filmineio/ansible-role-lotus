@@ -17,17 +17,22 @@
     shell: "/sbin/nologin"
     system: true
     create_home: false
+    home: "{{ lotus_user_home }}"
   tags:
     - install
 
 - name: Explicitly lotus user home
   become: true
   command: usermod -d {{ lotus_user_home }} {{ lotus_user }}
+  tags:
+    - install
 
 - name: Copy gitconfig
   become: true
   become_user: "{{ lotus_user }}"
   command: git config --global --add safe.directory '*'
+  tags:
+    - install
 
 - name: Ensure existence of install dir
   become: true
